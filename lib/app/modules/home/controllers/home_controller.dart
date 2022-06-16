@@ -1,20 +1,19 @@
 import 'package:get/get.dart';
+import 'package:news_flutter/app/data/_provider.dart';
+import 'package:news_flutter/app/data/models/article_models.dart';
+import 'package:news_flutter/app/data/models/news_models.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  var listOfNews = <Articles>[].obs;
+  var test = <NewsModel>[].obs;
 
-  final count = 0.obs;
+  getAllData() {
+    NewsProvider().getData(test);
+  }
+
   @override
   void onInit() {
+    getAllData();
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

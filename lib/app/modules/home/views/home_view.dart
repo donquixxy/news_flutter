@@ -9,14 +9,43 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
+        title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Obx(
+        () => controller.test.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : RefreshIndicator(
+                onRefresh: () async {
+                  controller.getAllData();
+                },
+                child: ListView.builder(
+                  itemCount: controller.test[0].articles.length,
+                  itemBuilder: (context, index) {
+                    var data = controller.test[0].articles[index];
+                    return InkWell(
+                      onTap: () {
+                        print(controller.test[0].articles.length);
+                      },
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Image.network(data.urlToImage),
+                            Text(
+                              data.title,
+                              style: const TextStyle(
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
       ),
     );
   }
