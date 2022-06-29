@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:news_flutter/app/data/models/article_models.dart';
-import 'package:news_flutter/app/data/models/news_models.dart';
 import 'package:news_flutter/app/data/models/source_models.dart';
 
 import 'app/routes/app_pages.dart';
@@ -17,7 +16,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Application",
-      initialRoute: AppPages.INITIAL,
+      initialRoute: Routes.HOME_INDEX,
       getPages: AppPages.routes,
     ),
   );
