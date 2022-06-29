@@ -11,7 +11,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     var controller = Get.put(HomeController());
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
+      padding: const EdgeInsets.fromLTRB(12, 16, 12, 14),
       child: Obx(
         () => controller.test.isEmpty
             ? const Center(
@@ -20,6 +20,8 @@ class HomeView extends GetView<HomeController> {
             : RefreshIndicator(
                 onRefresh: controller.getAllData,
                 child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  physics: const BouncingScrollPhysics(),
                   controller: controller.scrollController,
                   itemCount: controller.test[0].articles.length,
                   itemBuilder: (context, index) {
@@ -32,8 +34,12 @@ class HomeView extends GetView<HomeController> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10)),
                         child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
@@ -51,11 +57,6 @@ class HomeView extends GetView<HomeController> {
                                       icon: const Icon(Icons.favorite),
                                       onPressed: () {
                                         controller.addToFavoriteHive(data);
-
-                                        // var data1 = Hive.box<Articles>(
-                                        //         'newsBookmarks')
-                                        //     .getAt(0);
-                                        // print(data1!.source.name);
                                       },
                                       color: Colors.white,
                                     ),
@@ -64,9 +65,10 @@ class HomeView extends GetView<HomeController> {
                               ),
                               Text(
                                 data.title,
+                                maxLines: 2,
+                                overflow: TextOverflow.clip,
                                 style: const TextStyle(
-                                  fontSize: 20,
-                                ),
+                                    fontSize: 20, fontWeight: FontWeight.w600),
                               )
                             ],
                           ),

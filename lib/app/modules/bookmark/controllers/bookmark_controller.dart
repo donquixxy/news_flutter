@@ -3,7 +3,7 @@ import 'package:news_flutter/app/data/hive_provider.dart';
 import 'package:news_flutter/app/data/models/article_models.dart';
 
 class BookmarkController extends GetxController {
-  HiveProvider _provider = HiveProvider();
+  final HiveProvider _provider = HiveProvider();
   var bookmarkData = <Articles>[].obs;
 
   List<Articles> fetchAllBookmark() {

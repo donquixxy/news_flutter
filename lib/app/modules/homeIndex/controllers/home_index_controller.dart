@@ -13,8 +13,14 @@ class HomeIndexController extends GetxController {
         label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(
-          Icons.search,
+          Icons.bookmark,
           color: Colors.blueGrey,
+        ),
+        label: 'Bookmark'),
+    const BottomNavigationBarItem(
+        icon: Icon(
+          Icons.search,
+          color: Colors.indigo,
         ),
         label: 'Search')
   ];

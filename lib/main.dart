@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:news_flutter/app/data/models/article_models.dart';
 import 'package:news_flutter/app/data/models/source_models.dart';
@@ -16,6 +17,9 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Application",
+      theme: ThemeData(
+        fontFamily: GoogleFonts.openSans().fontFamily,
+      ),
       initialRoute: Routes.HOME_INDEX,
       getPages: AppPages.routes,
     ),
