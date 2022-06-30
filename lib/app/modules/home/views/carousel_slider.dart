@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_flutter/app/data/models/article_models.dart';
 import 'package:news_flutter/app/modules/home/controllers/home_controller.dart';
+import 'package:news_flutter/app/routes/app_pages.dart';
 
 class CarouselSliderWidget extends StatelessWidget {
   @override
@@ -19,24 +19,56 @@ class CarouselSliderWidget extends StatelessWidget {
             (dataArticles) => Column(
               children: [
                 Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: CachedNetworkImage(
-                            imageUrl: dataArticles.urlToImage ?? noImageUrl,
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                            height: Get.mediaQuery.size.height * 0.3,
-                            placeholder: (context, url) =>
-                                Image.network(noImageUrl),
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.DETAILS,
+                              arguments: [dataArticles]);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(8),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      dataArticles.urlToImage ?? noImageUrl,
+                                  fit: BoxFit.fill,
+                                  width: double.infinity,
+                                  height: Get.mediaQuery.size.height * 0.3,
+                                  placeholder: (context, url) =>
+                                      Image.network(noImageUrl),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Positioned(
+                        bottom: 30,
+                        left: 20,
+                        right: 10,
+                        child: Text(
+                          dataArticles.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                            shadows: [
+                              Shadow(offset: Offset(1, 0), color: Colors.black),
+                              Shadow(offset: Offset(2, 1), color: Colors.black),
+                              Shadow(
+                                  offset: Offset(2.2, 2), color: Colors.black)
+                            ],
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Row(
@@ -56,14 +88,16 @@ class CarouselSliderWidget extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(4, 2, 4, 0),
                                   child: Container(
-                                    width: 10,
-                                    height: 10,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: controller.carouselIndex.value ==
-                                                e.key
-                                            ? Colors.orange.withOpacity(0.7)
-                                            : Colors.grey.withOpacity(0.4)),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      controller.carouselIndex.value == e.key
+                                          ? Icons.fiber_manual_record
+                                          : Icons.fiber_manual_record_outlined,
+                                      color: Colors.orange,
+                                      size: 12,
+                                    ),
                                   ),
                                 ),
                               ),

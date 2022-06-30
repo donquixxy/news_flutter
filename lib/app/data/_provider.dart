@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 
 import 'package:news_flutter/app/data/models/news_models.dart';
 
@@ -12,6 +13,10 @@ class NewsProvider {
     'bitcoin',
     'crypto'
   ];
+  Map<String, dynamic> headers = {
+    "Authorization": "57b829578524416c80edbd8eef9e32b9",
+    "Content-Type": "application/json"
+  };
 
   String baseUrl = 'https://newsapi.org/v2/everything';
   final dio = Dio();
@@ -32,14 +37,11 @@ class NewsProvider {
   Future<NewsModel?> getData() async {
     String randomize = randomQuery[Random().nextInt(randomQuery.length)];
 
-    Response response = await dio.get(
+    var response = await dio.get(
       baseUrl,
       queryParameters: {'q': randomize},
       options: Options(
-        headers: {
-          "Authorization": "57b829578524416c80edbd8eef9e32b9",
-          "Content-Type": "application/json"
-        },
+        headers: headers,
       ),
     );
     // print(response.data);
@@ -49,5 +51,97 @@ class NewsProvider {
     NewsModel newData = NewsModel.fromJson(response.data);
 
     return newData;
+  }
+
+  Future<NewsModel?> getDataWithQuery(String query) async {
+    try {
+      var response = await dio.get(
+        baseUrl,
+        queryParameters: {'q': query},
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return NewsModel.fromJson(response.data);
+    } on DioError catch (e) {
+      Get.defaultDialog(
+        middleText: e.message,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+      return null;
+    }
+  }
+
+  Future<NewsModel?> getFinanceData() async {
+    try {
+      var response = await dio.get(
+        baseUrl,
+        queryParameters: {'q': 'finance'},
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return NewsModel.fromJson(response.data);
+    } on DioError catch (e) {
+      Get.defaultDialog(
+        middleText: e.message,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+      return null;
+    }
+  }
+
+  Future<NewsModel?> getSportsData() async {
+    try {
+      var response = await dio.get(
+        baseUrl,
+        queryParameters: {'q': 'sports'},
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return NewsModel.fromJson(response.data);
+    } on DioError catch (e) {
+      Get.defaultDialog(
+        middleText: e.message,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+      return null;
+    }
+  }
+
+  Future<NewsModel?> getTechData() async {
+    try {
+      var response = await dio.get(
+        baseUrl,
+        queryParameters: {'q': 'tech'},
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return NewsModel.fromJson(response.data);
+    } on DioError catch (e) {
+      Get.defaultDialog(
+        middleText: e.message,
+        textConfirm: 'Ok',
+        onConfirm: () {
+          Get.back();
+        },
+      );
+      return null;
+    }
   }
 }
