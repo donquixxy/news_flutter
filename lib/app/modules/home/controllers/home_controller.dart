@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,8 @@ class HomeController extends GetxController {
   var test = <NewsModel>[].obs;
   ScrollController scrollController = ScrollController();
   final HiveProvider _provider = HiveProvider();
+  var carouselIndex = 0.obs;
+  late CarouselController controllerCarousel;
 
   Future getAllData() async {
     var result = await NewsProvider().getData();
@@ -26,6 +29,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     // print(hiveNewsFavorite.printInfo);
+    controllerCarousel = CarouselController();
     getAllData();
     super.onInit();
   }

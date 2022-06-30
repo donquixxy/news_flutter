@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:news_flutter/app/data/hive_provider.dart';
 import 'package:news_flutter/app/modules/bookmark/views/bookmark_view.dart';
 import 'package:news_flutter/app/modules/home/views/home_view.dart';
 import 'package:news_flutter/app/modules/search/views/search_view.dart';

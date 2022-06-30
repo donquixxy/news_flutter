@@ -7,7 +7,7 @@ import '../controllers/search_controller.dart';
 class SearchView extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text("OK"),
     );
   }
