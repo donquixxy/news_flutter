@@ -13,7 +13,7 @@ class Articles {
   @HiveField(2)
   final String title;
   @HiveField(3)
-  final String description;
+  final String? description;
   @HiveField(4)
   final String url;
   @HiveField(5)

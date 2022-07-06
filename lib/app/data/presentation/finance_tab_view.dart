@@ -8,7 +8,8 @@ class FinanceView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     var controller = Get.find<HomeController>();
     return ListView.separated(
-      physics: BouncingScrollPhysics(),
+      controller: controller.scrollController,
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       itemCount: controller.financeData[0].articles.length,
       itemBuilder: (context, index) {
@@ -16,7 +17,7 @@ class FinanceView extends GetView<HomeController> {
         return CardWidget(articlesData);
       },
       separatorBuilder: (context, index) {
-        return Divider();
+        return const Divider();
       },
     );
   }

@@ -7,7 +7,7 @@ import 'package:news_flutter/app/routes/app_pages.dart';
 class CardWidget extends StatelessWidget {
   final Articles articles;
 
-  CardWidget(this.articles);
+  const CardWidget(this.articles);
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,14 @@ class CardWidget extends StatelessWidget {
                     articles.title,
                     maxLines: 2,
                     overflow: TextOverflow.fade,
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   Text(
                     "Written by : ${articles.source.name}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.grey, fontWeight: FontWeight.w800),
                   )
                 ],

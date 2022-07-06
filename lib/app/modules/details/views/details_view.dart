@@ -10,10 +10,11 @@ class DetailsView extends GetView<DetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
           return ListView(
-            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
             children: [
               Stack(
                 children: [
@@ -29,7 +30,7 @@ class DetailsView extends GetView<DetailsController> {
                       child: ElevatedButton(
                         onPressed: () => Get.back(),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black26,
+                          primary: Colors.orange.shade600,
                           shape: const CircleBorder(),
                         ),
                         child: const Icon(
@@ -55,7 +56,8 @@ class DetailsView extends GetView<DetailsController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        textWidgetBuilder(controller.arguments.title, 20),
+                        textWidgetBuilder(
+                            controller.arguments.title, 20, FontWeight.bold),
                         const SizedBox(
                           height: 15,
                         ),
@@ -64,11 +66,42 @@ class DetailsView extends GetView<DetailsController> {
                         const SizedBox(
                           height: 10,
                         ),
-                        textWidgetBuilder(controller.arguments.description, 14),
+                        textWidgetBuilder(
+                            controller.arguments.description ??
+                                'No Description',
+                            14),
                         const SizedBox(
                           height: 5,
                         ),
-                        textWidgetBuilder(controller.arguments.content, 14)
+                        textWidgetBuilder(controller.arguments.content, 14),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 60,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              controller.addToBookmark();
+                            },
+                            style: OutlinedButton.styleFrom(
+                                primary: Colors.orange.withOpacity(1),
+                                visualDensity:
+                                    VisualDensity.adaptivePlatformDensity,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                elevation: 3,
+                                onSurface: Colors.orange,
+                                surfaceTintColor: Colors.orange,
+                                backgroundColor: Colors.white,
+                                side: BorderSide(color: Colors.orange)),
+                            child: Text(
+                              "Save to Bookmark".toUpperCase(),
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.orange),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   )
@@ -81,11 +114,14 @@ class DetailsView extends GetView<DetailsController> {
     );
   }
 
-  Widget textWidgetBuilder(String text, double fontSize) {
+  Widget textWidgetBuilder(String text, double fontSize,
+      [FontWeight weight = FontWeight.normal]) {
     return Text(
       text,
       style: TextStyle(
-          fontSize: fontSize, fontFamily: GoogleFonts.notoSans().fontFamily),
+          fontWeight: weight,
+          fontSize: fontSize,
+          fontFamily: GoogleFonts.notoSans().fontFamily),
     );
   }
 }

@@ -8,7 +8,7 @@ class TechView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     var controller = Get.find<HomeController>();
     return ListView.separated(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       itemCount: controller.techData[0].articles.length,
       itemBuilder: (context, index) {
@@ -16,7 +16,7 @@ class TechView extends GetView<HomeController> {
         return CardWidget(articlesData);
       },
       separatorBuilder: (context, index) {
-        return Divider();
+        return const Divider();
       },
     );
   }

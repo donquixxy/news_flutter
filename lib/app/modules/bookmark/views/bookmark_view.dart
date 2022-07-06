@@ -14,65 +14,92 @@ class BookmarkView extends GetView<BookmarkController> {
     return Obx(
       () => controller.bookmarkData.isEmpty
           ? const Center(
-              child: CircularProgressIndicator.adaptive(),
+              child: Text('No News Saved yet'),
             )
           : RefreshIndicator(
               onRefresh: () async {
                 controller.fetchAllBookmark();
               },
-              child: LayoutBuilder(builder: (context, constraints) {
-                return ListView.builder(
-                  itemCount: controller.bookmarkData.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Articles data = controller.bookmarkData[index];
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(14, 8, 14, 2),
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.DETAILS, arguments: [data]);
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 6,
-                          child: Row(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ListView.builder(
+                    itemCount: controller.bookmarkData.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Articles data = controller.bookmarkData[index];
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 8, 14, 2),
+                        child: InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.DETAILS, arguments: [data]);
+                          },
+                          child: Column(
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: CachedNetworkImage(
-                                    imageUrl: data.urlToImage!,
-                                    fit: BoxFit.fitHeight,
-                                    height: 120,
-                                    width: constraints.maxWidth * 0.35),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data.title,
-                                      overflow: TextOverflow.ellipsis,
+                              Stack(
+                                children: [
+                                  Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    elevation: 6,
+                                    child: Row(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: CachedNetworkImage(
+                                              imageUrl: data.urlToImage!,
+                                              fit: BoxFit.fitHeight,
+                                              height: 120,
+                                              width:
+                                                  constraints.maxWidth * 0.35),
+                                        ),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data.title,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text("by ${data.source.name}",
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade500))
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    const SizedBox(
-                                      height: 5,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        controller.removeBookmark(index);
+                                      },
+                                      icon: Icon(
+                                        Icons.bookmark_remove,
+                                        color: Colors.orange.withOpacity(0.7),
+                                      ),
                                     ),
-                                    Text("by ${data.source.name}",
-                                        style: TextStyle(
-                                            color: Colors.grey.shade500))
-                                  ],
-                                ),
-                              )
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              }),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
     );
   }
