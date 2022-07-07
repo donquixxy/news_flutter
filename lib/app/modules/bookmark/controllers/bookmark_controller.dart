@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:news_flutter/app/data/hive_provider.dart';
 import 'package:news_flutter/app/data/models/article_models.dart';
-import 'package:hive/hive.dart';
 
 class BookmarkController extends GetxController {
   final HiveProvider _provider = HiveProvider();

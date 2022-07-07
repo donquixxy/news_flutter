@@ -40,7 +40,7 @@ class CardWidget extends StatelessWidget {
                     articles.title,
                     maxLines: 2,
                     overflow: TextOverflow.fade,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 15,

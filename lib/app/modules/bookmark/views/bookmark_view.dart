@@ -23,6 +23,7 @@ class BookmarkView extends GetView<BookmarkController> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: controller.bookmarkData.length,
                     itemBuilder: (BuildContext context, int index) {
                       final Articles data = controller.bookmarkData[index];

@@ -23,9 +23,9 @@ class HomeView extends GetView<HomeController> {
                   child: CircularProgressIndicator.adaptive(),
                 )
               : NestedScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   body: TabBarView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: controller.tabController,
                     children: [
                       TechView(),
@@ -40,7 +40,7 @@ class HomeView extends GetView<HomeController> {
                         backgroundColor: Colors.white,
                         expandedHeight: Get.height * 0.2,
                         collapsedHeight: Get.height * 0.4,
-                        flexibleSpace: AppBarWidget(),
+                        flexibleSpace: const AppBarWidget(),
                       ),
                       SliverPersistentHeader(
                         pinned: true,

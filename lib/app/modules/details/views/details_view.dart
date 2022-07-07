@@ -94,11 +94,11 @@ class DetailsView extends GetView<DetailsController> {
                                 onSurface: Colors.orange,
                                 surfaceTintColor: Colors.orange,
                                 backgroundColor: Colors.white,
-                                side: BorderSide(color: Colors.orange)),
+                                side: const BorderSide(color: Colors.orange)),
                             child: Text(
                               "Save to Bookmark".toUpperCase(),
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.orange),
+                                  const TextStyle(fontSize: 16, color: Colors.orange),
                             ),
                           ),
                         )
