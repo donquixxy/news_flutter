@@ -14,8 +14,7 @@ class ArticleSearch extends SearchDelegate<Articles> {
       IconButton(
           onPressed: () async {
             var data = await controller.fetchQueryData(query);
-
-            print(data?.articles);
+            // print(data?.articles);
           },
           icon: const Icon(Icons.search)),
       IconButton(
@@ -41,10 +40,7 @@ class ArticleSearch extends SearchDelegate<Articles> {
     return Obx(
       () {
         return controller.resultSearch[0].articles.isEmpty
-            ? const Text(
-                'asd',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              )
+            ? const SizedBox()
             : ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 itemCount: controller.resultSearch[0].articles.length,
