@@ -16,13 +16,13 @@ class BookmarkView extends GetView<BookmarkController> {
           ? const Center(
               child: Text('No News Saved yet'),
             )
-          : RefreshIndicator(
-              onRefresh: () async {
-                controller.fetchAllBookmark();
-              },
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return ListView.builder(
+          : LayoutBuilder(
+              builder: (context, constraints) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await controller.fetchAllBookmark();
+                  },
+                  child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: controller.bookmarkData.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -98,9 +98,9 @@ class BookmarkView extends GetView<BookmarkController> {
                         ),
                       );
                     },
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
     );
   }

@@ -54,7 +54,7 @@ class HomeController extends GetxController
   }
 
   Future getFinanceData() async {
-    var result = await NewsProvider().getFinanceData();
+    var result = await NewsProvider().getDataWithQuery('finance');
 
     if (financeData.isEmpty) {
       financeData.add(result!);
@@ -66,7 +66,7 @@ class HomeController extends GetxController
   }
 
   Future getSportsData() async {
-    var result = await NewsProvider().getSportsData();
+    var result = await NewsProvider().getDataWithQuery('sports');
 
     if (sportsData.isEmpty) {
       sportsData.add(result!);
@@ -78,7 +78,7 @@ class HomeController extends GetxController
   }
 
   Future getTechData() async {
-    var result = await NewsProvider().getTechData();
+    var result = await NewsProvider().getDataWithQuery('tech');
 
     if (techData.isEmpty) {
       techData.add(result!);

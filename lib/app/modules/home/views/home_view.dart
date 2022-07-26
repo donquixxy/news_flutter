@@ -19,165 +19,54 @@ class HomeView extends GetView<HomeController> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 16, 12, 14),
       child: Obx(() => controller.test.isEmpty
-              ? const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                )
-              : NestedScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  body: TabBarView(
-                    physics: const ClampingScrollPhysics(),
-                    controller: controller.tabController,
-                    children: [
-                      TechView(),
-                      FinanceView(),
-                      SportsView(),
-                    ],
+          ? const Center(
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : NestedScrollView(
+              physics: const BouncingScrollPhysics(),
+              body: TabBarView(
+                physics: const ClampingScrollPhysics(),
+                controller: controller.tabController,
+                children: [
+                  TechView(),
+                  FinanceView(),
+                  SportsView(),
+                ],
+              ),
+              headerSliverBuilder: (context, isScrolled) {
+                return [
+                  SliverAppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    expandedHeight: Get.height * 0.2,
+                    collapsedHeight: Get.height * 0.33,
+                    flexibleSpace: const AppBarWidget(),
                   ),
-                  headerSliverBuilder: (context, isScrolled) {
-                    return [
-                      SliverAppBar(
-                        elevation: 0,
-                        backgroundColor: Colors.white,
-                        expandedHeight: Get.height * 0.2,
-                        collapsedHeight: Get.height * 0.4,
-                        flexibleSpace: const AppBarWidget(),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    floating: true,
+                    delegate: HeaderDelegate(
+                      TabBar(
+                        physics: const BouncingScrollPhysics(),
+                        indicatorColor: Colors.orange.withOpacity(0.8),
+                        controller: controller.tabController,
+                        tabs: controller.tabBarItems
+                            .map(
+                              (e) => Text(
+                                e.text!,
+                                style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18),
+                              ),
+                            )
+                            .toList(),
                       ),
-                      SliverPersistentHeader(
-                        pinned: true,
-                        floating: true,
-                        delegate: HeaderDelegate(
-                          TabBar(
-                            physics: const BouncingScrollPhysics(),
-                            indicatorColor: Colors.orange.withOpacity(0.8),
-                            controller: controller.tabController,
-                            tabs: controller.tabBarItems
-                                .map(
-                                  (e) => Text(
-                                    e.text!,
-                                    style: const TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 18),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                      )
-                    ];
-                  },
-                )
-          // : RefreshIndicator(
-          //     onRefresh: controller.getAllData,
-          //     child: CustomScrollView(
-          //       physics: ClampingScrollPhysics(),
-          //       primary: true,
-          //       shrinkWrap: true,
-          //       slivers: [
-          //         SliverToBoxAdapter(
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             mainAxisAlignment: MainAxisAlignment.start,
-          //             children: [
-          //               ///-----\\
-          //               const Text(
-          //                 "Flutter News",
-          //                 style: TextStyle(
-          //                     fontSize: 20, fontWeight: FontWeight.w600),
-          //               ),
-          //               CarouselSliderWidget(),
-          //               const SizedBox(
-          //                 height: 10,
-          //               ),
-          //               const Text(
-          //                 "Latest News",
-          //                 style: TextStyle(
-          //                     fontSize: 24, fontWeight: FontWeight.w700),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //         SliverAppBar(
-
-          //           elevation: 0,
-          //           backgroundColor: Colors.transparent,
-          //           bottom: PreferredSize(
-          //             preferredSize: Size.fromHeight(0),
-          //             child: TabBar(
-          //               physics: const NeverScrollableScrollPhysics(),
-          //               indicatorColor: Colors.orange.withOpacity(0.8),
-          //               controller: controller.tabController,
-          //               tabs: controller.tabBarItems
-          //                   .map(
-          //                     (e) => Text(
-          //                       e.text!,
-          //                       style: const TextStyle(
-          //                           color: Colors.grey,
-          //                           fontWeight: FontWeight.w800,
-          //                           fontSize: 18),
-          //                     ),
-          //                   )
-          //                   .toList(),
-          //             ),
-          //           ),
-          //         ),
-          //         SliverToBoxAdapter(
-          //           child: Container(
-          //             height: Get.mediaQuery.size.height * 1,
-          //             child: TabBarView(
-          //               controller: controller.tabController,
-          //               physics: BouncingScrollPhysics(),
-          //               children: [TechView(), FinanceView(), SportsView()],
-          //             ),
-          //           ),
-          //         )
-
-          //         ///-----\\
-          //         // const Text(
-          //         //   "Flutter News",
-          //         //   style:
-          //         //       TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-          //         // ),
-          //         // CarouselSliderWidget(),
-          //         // const SizedBox(
-          //         //   height: 10,
-          //         // ),
-          //         // const Text(
-          //         //   "Latest News",
-          //         //   style:
-          //         //       TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-          //         // ),
-          //         // const SizedBox(
-          //         //   height: 15,
-          //         // ),
-          //         // TabBar(
-          //         //   physics: const NeverScrollableScrollPhysics(),
-          //         //   indicatorColor: Colors.orange.withOpacity(0.8),
-          //         //   controller: controller.tabController,
-          //         //   tabs: controller.tabBarItems
-          //         //       .map(
-          //         //         (e) => Text(
-          //         //           e.text!,
-          //         //           style: const TextStyle(
-          //         //               color: Colors.grey,
-          //         //               fontWeight: FontWeight.w800,
-          //         //               fontSize: 18),
-          //         //         ),
-          //         //       )
-          //         //       .toList(),
-          //         // ),
-          //         // SizedBox(
-          //         //   height: Get.mediaQuery.size.height * 0.5,
-          //         //   child: TabBarView(
-          //         //     physics: const BouncingScrollPhysics(),
-          //         //     controller: controller.tabController,
-          //         //     children: [TechView(), FinanceView(), SportsView()],
-          //         //   ),
-          //         // )
-          //       ],
-          //     ),
-          //   ),
-          ),
+                    ),
+                  )
+                ];
+              },
+            )),
     );
   }
 }

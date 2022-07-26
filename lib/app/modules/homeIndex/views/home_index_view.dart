@@ -13,9 +13,10 @@ class HomeIndexView extends GetView<HomeIndexController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        drawer: Drawer(),
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('HomeIndexView'),
+          title: const Text('News App'),
           centerTitle: true,
           actions: [
             IconButton(
@@ -44,15 +45,6 @@ class HomeIndexView extends GetView<HomeIndexController> {
             onTap: controller.changeIndex,
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     var asd = HiveProvider();
-
-        //     // for (Articles data in asd.box.values) {
-        //     //   print(data.author);
-        //     // }
-        //   },
-        // ),
       ),
     );
   }

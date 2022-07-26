@@ -16,6 +16,7 @@ void main() async {
   await Hive.openBox<Articles>('newsBookmarks');
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Application",
       theme: ThemeData(
         fontFamily: GoogleFonts.openSans().fontFamily,

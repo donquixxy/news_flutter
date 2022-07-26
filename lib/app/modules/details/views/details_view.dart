@@ -30,7 +30,7 @@ class DetailsView extends GetView<DetailsController> {
                       child: ElevatedButton(
                         onPressed: () => Get.back(),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.orange.shade600,
+                          primary: Colors.blue.shade400,
                           shape: const CircleBorder(),
                         ),
                         child: const Icon(
@@ -85,20 +85,19 @@ class DetailsView extends GetView<DetailsController> {
                               controller.addToBookmark();
                             },
                             style: OutlinedButton.styleFrom(
-                                primary: Colors.orange.withOpacity(1),
+                                primary: Colors.white,
                                 visualDensity:
                                     VisualDensity.adaptivePlatformDensity,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 elevation: 3,
-                                onSurface: Colors.orange,
-                                surfaceTintColor: Colors.orange,
-                                backgroundColor: Colors.white,
-                                side: const BorderSide(color: Colors.orange)),
+                                backgroundColor: Colors.blue,
+                                side: const BorderSide(color: Colors.blue)),
                             child: Text(
                               "Save to Bookmark".toUpperCase(),
-                              style:
-                                  const TextStyle(fontSize: 16, color: Colors.orange),
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         )
